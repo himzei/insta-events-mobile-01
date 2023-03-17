@@ -68,7 +68,11 @@ export default function Home() {
             <Text>인스타그램 인증전송</Text>
           </Button>
         </VStack>
-        {data?.stamp ? <Text>인증되었습니다.</Text> : null}
+        {data?.stamp ? (
+          <Text>인증되었습니다.</Text>
+        ) : (
+          <Text>해시태그가 인증되지 않았습니다.</Text>
+        )}
       </VStack>
     </VStack>
   );
