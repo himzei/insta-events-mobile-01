@@ -41,7 +41,7 @@ export default function Home() {
           rounded="lg"
         >
           <Text>
-            해시태그 #스패이스에듀 #스탬프인증 을 입력해서 포스팅 해주세요
+            해시태그 #스페이스에듀 #스탬프인증 을 입력해서 포스팅 해주세요
           </Text>
           <Text>인스타그램 URL을 입력해서 전송해주세요</Text>
         </VStack>
