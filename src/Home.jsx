@@ -21,6 +21,9 @@ import { AiFillCopy } from "react-icons/ai";
 import { useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { numberFormat } from "./lib/utils";
+import Method1 from "./assets/png/method1.png";
+import Method2 from "./assets/png/method2.png";
+import { AiOutlineArrowDown } from "react-icons/ai";
 
 export default function Home() {
   const {
@@ -391,6 +394,38 @@ export default function Home() {
                     </Text>
                   </Text>
                 </VStack>
+              </VStack>
+
+              <VStack
+                w="full"
+                bg="white"
+                p="4"
+                position="relative"
+                rounded="xl"
+                spacing="8"
+              >
+                <Box
+                  position="absolute"
+                  top="-5"
+                  bg="white"
+                  px="8"
+                  rounded="2xl"
+                  py="2"
+                >
+                  <Text fontSize="16" color="red.900" fontWeight={900}>
+                    인스타 링크복사 방법
+                  </Text>
+                </Box>
+                <Box>
+                  <Image src={Method1} />
+                </Box>
+                <VStack spacing="0">
+                  <AiOutlineArrowDown color="red" size="18" />
+                  <AiOutlineArrowDown color="red" size="18" />
+                </VStack>
+                <Box>
+                  <Image src={Method2} />
+                </Box>
               </VStack>
 
               {/* 해시태그 복사 */}
