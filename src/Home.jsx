@@ -416,7 +416,14 @@ export default function Home() {
                         onCopy={() => setCopied(true)}
                       >
                         {copied === true ? (
-                          <Text fontSize="13">복사됨</Text>
+                          <>
+                            <Text fontSize="13">복사됨</Text>
+                            <Box display="none">
+                              {setTimeout(() => {
+                                window.open("https://www.instagram.com/");
+                              }, 1000)}
+                            </Box>
+                          </>
                         ) : (
                           <AiFillCopy size="16" />
                         )}
