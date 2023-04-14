@@ -453,11 +453,6 @@ export default function Home() {
                         {copied === true ? (
                           <>
                             <Text fontSize="13">복사됨</Text>
-                            <Box display="none">
-                              {setTimeout(() => {
-                                window.open("https://www.instagram.com/");
-                              }, 1000)}
-                            </Box>
                           </>
                         ) : (
                           <AiFillCopy size="16" />
