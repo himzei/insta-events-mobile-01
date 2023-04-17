@@ -7,23 +7,32 @@ import {
   Image,
   Input,
   Text,
-  Tooltip,
   useToast,
   VStack,
+  keyframes,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { useMutation, useQuery } from "react-query";
 import { getKeywords, getRanking, getStamp } from "./api";
-import Camera from "./assets/svg/camera.svg";
 import Insta from "./assets/svg/instagram.svg";
-import Url from "./assets/svg/url.svg";
 import { AiFillCopy } from "react-icons/ai";
 import { useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { numberFormat } from "./lib/utils";
 import Method1 from "./assets/png/method1.png";
 import Method2 from "./assets/png/method2.png";
-import { AiOutlineArrowDown } from "react-icons/ai";
+import Howto1 from "./assets/png/howto1.png";
+import Howto2 from "./assets/png/howto2.png";
+import { motion } from "framer-motion";
+import { MdOutlineDoubleArrow } from "react-icons/md";
+
+const animationKeyframes = keyframes`
+  0% { transform: scale(1); opacity: 0.2; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1.4); opacity: 0.2; }
+`;
+
+const animation = `${animationKeyframes} 2s ease-in-out infinite`;
 
 export default function Home() {
   const {
@@ -270,181 +279,26 @@ export default function Home() {
                   </Text>
                 </Box>
                 {/* step1 */}
+
+                {/* 해시태그 복사 */}
                 <VStack
                   w="full"
+                  overflow="hidden"
+                  spacing="0"
+                  rounded="md"
                   border="1px"
-                  rounded="lg"
-                  borderColor="gray.200"
-                  p="4"
-                  position="relative"
+                  borderColor="gray.300"
                 >
-                  <Box
-                    position="absolute"
-                    w="16"
-                    h="6"
-                    rounded="full"
-                    bg="black"
-                    top="-3"
-                    left="4"
+                  <HStack
+                    bgGradient="linear(to-l, #7928CA, #FF0080)"
+                    w="full"
+                    justifyContent="space-between"
+                    color="white"
                   >
-                    <Text
-                      transform="translateY(20%)"
-                      color="white"
-                      fontWeight={600}
-                      align={"center"}
-                      fontSize={"12"}
-                    >
-                      STEP1
+                    <Text fontWeight="900" fontSize="16" py="2" px="4">
+                      1. 해시태그 복사
                     </Text>
-                  </Box>
 
-                  <Box>
-                    <Image src={Camera} />
-                  </Box>
-                  <Text as="span" align="center">
-                    포토존(행사) 결과물과
-                    <br /> 함께{" "}
-                    <Text as="span" color="red.500" fontWeight={600}>
-                      인증샷 촬영
-                    </Text>
-                  </Text>
-                </VStack>
-
-                {/* step2 */}
-                <VStack
-                  w="full"
-                  border="1px"
-                  rounded="lg"
-                  borderColor="gray.200"
-                  p="4"
-                  position="relative"
-                >
-                  <Box
-                    position="absolute"
-                    w="16"
-                    h="6"
-                    rounded="full"
-                    bg="black"
-                    top="-3"
-                    left="4"
-                  >
-                    <Text
-                      transform="translateY(20%)"
-                      color="white"
-                      fontWeight={600}
-                      align={"center"}
-                      fontSize={"12"}
-                    >
-                      STEP2
-                    </Text>
-                  </Box>
-
-                  <Box w="12">
-                    <Image src={Insta} />
-                  </Box>
-                  <Text as="span" align="center">
-                    아래의{" "}
-                    <Text as="span" color="red.500" fontWeight={600}>
-                      해시태그
-                    </Text>
-                    를 복사 후,
-                    <br />
-                    모든 해시태그가 포함된 인스타 글 작성
-                  </Text>
-                </VStack>
-
-                {/* step3 */}
-                <VStack
-                  w="full"
-                  border="1px"
-                  rounded="lg"
-                  borderColor="gray.200"
-                  p="4"
-                  position="relative"
-                >
-                  <Box
-                    position="absolute"
-                    w="16"
-                    h="6"
-                    rounded="full"
-                    bg="black"
-                    top="-3"
-                    left="4"
-                  >
-                    <Text
-                      transform="translateY(20%)"
-                      color="white"
-                      fontWeight={600}
-                      align={"center"}
-                      fontSize={"12"}
-                    >
-                      STEP3
-                    </Text>
-                  </Box>
-
-                  <Box w="12">
-                    <Image src={Url} />
-                  </Box>
-                  <Text as="span" align="center">
-                    작성된 인스타그램 '링크복사' 후
-                    <br />
-                    아래 입력폼에서 붙여넣기 후{" "}
-                    <Text as="span" color="red.500" fontWeight={600}>
-                      전송!!
-                    </Text>
-                  </Text>
-                </VStack>
-              </VStack>
-
-              <VStack
-                w="full"
-                bg="white"
-                p="4"
-                position="relative"
-                rounded="xl"
-                spacing="8"
-              >
-                <Box
-                  position="absolute"
-                  top="-5"
-                  bg="white"
-                  px="8"
-                  rounded="2xl"
-                  py="2"
-                >
-                  <Text fontSize="16" color="red.900" fontWeight={900}>
-                    인스타 링크복사 방법
-                  </Text>
-                </Box>
-                <Box>
-                  <Image src={Method1} />
-                </Box>
-                <VStack spacing="0">
-                  <AiOutlineArrowDown color="red" size="18" />
-                  <AiOutlineArrowDown color="red" size="18" />
-                </VStack>
-                <Box>
-                  <Image src={Method2} />
-                </Box>
-              </VStack>
-
-              {/* 해시태그 복사 */}
-              <VStack w="full" overflow="hidden" spacing="0" rounded="md">
-                <HStack
-                  bgGradient="linear(to-l, #7928CA, #FF0080)"
-                  w="full"
-                  justifyContent="space-between"
-                  color="white"
-                >
-                  <Text fontWeight="900" fontSize="16" py="2" px="4">
-                    해시태그 복사
-                  </Text>
-                  <Tooltip
-                    hasArrow
-                    label="해시태그 복사"
-                    bg="black"
-                    placement="left"
-                  >
                     <Button variant="ghost" _hover={{ bg: "none" }}>
                       <CopyToClipboard
                         text={keywordsHash}
@@ -455,36 +309,136 @@ export default function Home() {
                             <Text fontSize="13">복사됨</Text>
                           </>
                         ) : (
-                          <AiFillCopy size="16" />
+                          <Box
+                            as={motion.div}
+                            animation={animation}
+                            transition="0.2s linear"
+                          >
+                            <AiFillCopy size="16" />
+                          </Box>
                         )}
                       </CopyToClipboard>
                     </Button>
-                  </Tooltip>
-                </HStack>
-                <HStack
-                  bg="white"
-                  fontSize="16"
-                  color="green.600"
+                  </HStack>
+                  <HStack
+                    bg="white"
+                    fontSize="16"
+                    color="green.600"
+                    w="full"
+                    px="2"
+                    py="4"
+                    gap="1"
+                    wrap="wrap"
+                  >
+                    {keywords?.map((item, i) => (
+                      <Text
+                        key={i}
+                        cursor="pointer"
+                        bg="gray.900"
+                        color="white"
+                        px="4"
+                        py="1"
+                        rounded="2xl"
+                      >
+                        {item.includes("#") ? item.trim() : `#${item.trim()}`}
+                      </Text>
+                    ))}
+                  </HStack>
+                </VStack>
+
+                {/* step2 */}
+
+                <VStack
                   w="full"
-                  px="2"
-                  py="4"
-                  gap="1"
-                  wrap="wrap"
+                  overflow="hidden"
+                  spacing="0"
+                  rounded="md"
+                  border="1px"
+                  borderColor="gray.300"
                 >
-                  {keywords?.map((item, i) => (
-                    <Text
-                      key={i}
-                      cursor="pointer"
-                      bg="gray.900"
-                      color="white"
-                      px="4"
-                      py="1"
-                      rounded="2xl"
-                    >
-                      {item.includes("#") ? item.trim() : `#${item.trim()}`}
+                  <HStack
+                    bgGradient="linear(to-l, #7928CA, #FF0080)"
+                    w="full"
+                    justifyContent="space-between"
+                    color="white"
+                  >
+                    <Text fontWeight="900" fontSize="16" py="2" px="4">
+                      2. 해시태그 붙여넣기
                     </Text>
-                  ))}
-                </HStack>
+                  </HStack>
+                  <VStack spacing="4" py="3">
+                    <Text as="span" align="center">
+                      인스타 이동 후{" "}
+                      <Text as="span" color="red.500" fontWeight={600}>
+                        복사 한 해시태그{" "}
+                      </Text>
+                      붙여넣기
+                    </Text>
+                    <HStack justifyContent="space-around" px="4">
+                      <VStack w="40%">
+                        <Box>
+                          <Image src={Howto1} />
+                        </Box>
+                        <Box>
+                          <Image src={Howto2} />
+                        </Box>
+                      </VStack>
+                      <MdOutlineDoubleArrow color="red" />
+                      <Box w="12">
+                        <Image src={Insta} />
+                      </Box>
+                    </HStack>
+                  </VStack>
+                </VStack>
+
+                {/* step3 */}
+
+                <VStack
+                  w="full"
+                  overflow="hidden"
+                  spacing="0"
+                  rounded="md"
+                  border="1px"
+                  borderColor="gray.300"
+                >
+                  <HStack
+                    bgGradient="linear(to-l, #7928CA, #FF0080)"
+                    w="full"
+                    justifyContent="space-between"
+                    color="white"
+                  >
+                    <Text fontWeight="900" fontSize="16" py="2" px="4">
+                      3. 입력폼에 URL 붙여넣기
+                    </Text>
+                  </HStack>
+                  <VStack spacing="4" py="3">
+                    <Text as="span" align="center">
+                      인스타 '링크복사' 후
+                      <br />
+                      아래 입력폼에서 붙여넣기 후{" "}
+                      <Text as="span" color="red.500" fontWeight={600}>
+                        전송!!
+                      </Text>
+                    </Text>
+                    <Grid
+                      templateColumns={"4fr 1fr 4fr"}
+                      px="2"
+                      justifyContent="center"
+                      alignItems="center"
+                    >
+                      <Box>
+                        <Image src={Method1} />
+                      </Box>
+
+                      <Box w="full" align="center">
+                        <MdOutlineDoubleArrow color="red" />
+                      </Box>
+                      <Box>
+                        <Image src={Method2} />
+                      </Box>
+                    </Grid>
+                  </VStack>
+                </VStack>
               </VStack>
 
               {/* form */}
