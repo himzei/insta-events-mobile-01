@@ -27,9 +27,9 @@ import { motion } from "framer-motion";
 import { MdOutlineDoubleArrow } from "react-icons/md";
 
 const animationKeyframes = keyframes`
-  0% { transform: scale(1); opacity: 0.2; }
+  0% { transform: scale(1); opacity: 0; }
   50% { transform: scale(1.2); opacity: 1; }
-  100% { transform: scale(1.4); opacity: 0.2; }
+  100% { transform: scale(1.4); opacity: 0; }
 `;
 
 const animation = `${animationKeyframes} 2s ease-in-out infinite`;
@@ -384,9 +384,33 @@ export default function Home() {
                         </Box>
                       </VStack>
                       <MdOutlineDoubleArrow color="red" />
-                      <Box w="12">
-                        <Image src={Insta} />
-                      </Box>
+                      <VStack
+                        cursor="pointer"
+                        spacing={0}
+                        onClick={() =>
+                          window.open("https://www.instagram.com/")
+                        }
+                      >
+                        <Box w="12">
+                          <Image src={Insta} />
+                        </Box>
+
+                        <VStack spacing={0}>
+                          <Text fontSize="10" fontWeight={600}>
+                            인스타로 이동
+                          </Text>
+                          <Text
+                            color="red.500"
+                            fontSize="12"
+                            fontWeight={600}
+                            as={motion.div}
+                            animation={animation}
+                            transition="0.2s linear"
+                          >
+                            CLICK
+                          </Text>
+                        </VStack>
+                      </VStack>
                     </HStack>
                   </VStack>
                 </VStack>
