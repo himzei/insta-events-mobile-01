@@ -368,7 +368,7 @@ export default function Home() {
                   </HStack>
                   <VStack spacing="4" py="3">
                     <Text as="span" align="center">
-                      인스타 이동 후{" "}
+                      인스타 이동 후 <br />
                       <Text as="span" color="red.500" fontWeight={600}>
                         복사 한 해시태그{" "}
                       </Text>
