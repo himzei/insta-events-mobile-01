@@ -50,7 +50,7 @@ export default function Home() {
   );
 
   console.log(keywordsData);
-  const matchHashtag = keywordsData?.data?.hashtags_selected;
+  const matchHashtag = keywordsData?.data?.hashtags_selected || 0;
 
   const keywords_string_arr = keywordsData?.hashtags?.filter(
     (item) => item.pk === matchHashtag
