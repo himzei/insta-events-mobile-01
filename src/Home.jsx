@@ -25,6 +25,7 @@ import Howto1 from "./assets/png/howto1.png";
 import Howto2 from "./assets/png/howto2.png";
 import { motion } from "framer-motion";
 import { MdOutlineDoubleArrow } from "react-icons/md";
+import { ADM_EVENTS_NAME } from "./lib/settings";
 
 const animationKeyframes = keyframes`
   0% { transform: scale(1); opacity: 0; }
@@ -41,8 +42,22 @@ export default function Home() {
     formState: { errors },
   } = useForm();
   const toast = useToast();
-  const { data: keywordsData } = useQuery(["keywords"], getKeywords);
-  const keywords_string = keywordsData?.data?.keywords;
+  const { data: keywordsData } = useQuery(
+    ["keywords", ADM_EVENTS_NAME],
+    getKeywords
+  );
+
+  const matchHashtag = keywordsData?.data.hashtags_selected;
+
+  const keywords_string_arr = keywordsData?.hashtags.filter(
+    (item) => item.pk === matchHashtag
+  );
+
+  const keywords_string = keywords_string_arr[0].keywords;
+
+  // const keywords_string =
+  //   keywordsData?.hashtags[keywordsData?.data.hashtags_selected - 1].keywords;
+
   const keywordsArr = (keywords_string || "").split(",");
 
   // 공백없애기
@@ -154,8 +169,8 @@ export default function Home() {
             color="gray.100"
             py="1"
           >
-            <Text fontWeight={400}>2023.05.15(토)~05.16(일)</Text>
-            <Text fontWeight={900}>대구EXCO 2전시관 1-37</Text>
+            <Text fontWeight={400}>{keywordsData?.data?.events_date}</Text>
+            <Text fontWeight={900}>{keywordsData?.data?.events_name}</Text>
           </VStack>
 
           {instaUrl?.CNPARTNERS === "true" ? (
