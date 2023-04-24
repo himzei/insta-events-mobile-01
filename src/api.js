@@ -30,6 +30,8 @@ export async function getStamp({ url }) {
 
 export async function getKeywords(params) {
   const name = params.queryKey[1];
+
+  console.log(name);
   const response = await fetch(
     `${BASE_URL}/insta-admin/edit-keywords?name=${name}`,
     {

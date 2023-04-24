@@ -44,24 +44,12 @@ export default function Home() {
 
   const toast = useToast();
 
-  const { data: keywordsData } = useQuery(
-    ["keywords", ADM_EVENTS_NAME],
+  const { data: getKeywordsDAta } = useQuery(
+    ["keywords-get", ADM_EVENTS_NAME],
     getKeywords
   );
 
-  console.log(keywordsData);
-  const matchHashtag = keywordsData?.data?.hashtags_selected || 0;
-
-  const keywords_string_arr = keywordsData?.hashtags?.filter(
-    (item) => item.pk === matchHashtag
-  );
-
-  // const keywords_string_arr = "안녕, 팔공";
-
-  const keywords_string = keywords_string_arr[0].keywords;
-
-  // const keywords_string =
-  //   keywordsData?.hashtags[keywordsData?.data.hashtags_selected - 1].keywords;
+  const keywords_string = getKeywordsDAta?.hashtag;
 
   const keywordsArr = (keywords_string || "").split(",");
 
@@ -174,8 +162,8 @@ export default function Home() {
             color="gray.100"
             py="1"
           >
-            <Text fontWeight={400}>{keywordsData?.data?.events_date}</Text>
-            <Text fontWeight={900}>{keywordsData?.data?.events_name}</Text>
+            <Text fontWeight={400}>{getKeywordsDAta?.data?.events_date}</Text>
+            <Text fontWeight={900}>{getKeywordsDAta?.data?.events_name}</Text>
           </VStack>
 
           {instaUrl?.CNPARTNERS === "true" ? (
