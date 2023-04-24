@@ -41,17 +41,22 @@ export default function Home() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const toast = useToast();
+
   const { data: keywordsData } = useQuery(
     ["keywords", ADM_EVENTS_NAME],
     getKeywords
   );
 
-  const matchHashtag = keywordsData?.data.hashtags_selected;
+  console.log(keywordsData);
+  const matchHashtag = keywordsData?.data?.hashtags_selected;
 
-  const keywords_string_arr = keywordsData?.hashtags.filter(
+  const keywords_string_arr = keywordsData?.hashtags?.filter(
     (item) => item.pk === matchHashtag
   );
+
+  // const keywords_string_arr = "안녕, 팔공";
 
   const keywords_string = keywords_string_arr[0].keywords;
 
