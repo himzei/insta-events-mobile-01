@@ -148,7 +148,7 @@ export default function Home() {
               fontWeight={900}
               lineHeight={"48px"}
             >
-              인증샷 이벤트
+              인증 이벤트
             </Text>
           </VStack>
 
@@ -179,7 +179,7 @@ export default function Home() {
               >
                 <Text fontWeight={600}>안녕하세요😍</Text>
                 <Text as="span">
-                  인스타그램 인증샷 이벤트에{" "}
+                  인스타그램 인증 이벤트에{" "}
                   <Text as="span" color="blue.600" fontWeight={600}>
                     [응모 완료]
                   </Text>{" "}
