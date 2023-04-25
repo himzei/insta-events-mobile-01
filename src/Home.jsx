@@ -96,7 +96,7 @@ export default function Home() {
   });
 
   const onValid = ({ url }) => {
-    mutate({ url });
+    mutate({ url, ADM_EVENTS_NAME });
   };
   const onInvalid = (error) => {
     console.log(error);

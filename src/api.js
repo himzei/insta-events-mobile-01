@@ -1,7 +1,7 @@
 // const BASE_URL = "http://127.0.0.1:8000/api/v1";
-// const BASE_URL = "http://127.0.0.1:8000/api/v1";
-const BASE_URL =
-  "https://port-0-insta-stamp-test-by52fb24lbbufx8n.gksl2.cloudtype.app/api/v1";
+const BASE_URL = "http://127.0.0.1:8000/api/v1";
+// const BASE_URL =
+//   "https://port-0-insta-stamp-test-by52fb24lbbufx8n.gksl2.cloudtype.app/api/v1";
 
 export async function getRanking() {
   const response = await fetch(`${BASE_URL}/insta/ranking/`, {
@@ -14,11 +14,13 @@ export async function getRanking() {
   return json;
 }
 
-export async function getStamp({ url }) {
+export async function getStamp({ url, ADM_EVENTS_NAME }) {
+  // console.log(url, ADM_EVENTS_NAME);
   const response = await fetch(`${BASE_URL}/insta/`, {
     method: "POST",
     body: JSON.stringify({
       url,
+      ADM_EVENTS_NAME,
     }),
     headers: {
       "Content-Type": "application/json",
@@ -31,7 +33,6 @@ export async function getStamp({ url }) {
 export async function getKeywords(params) {
   const name = params.queryKey[1];
 
-  console.log(name);
   const response = await fetch(
     `${BASE_URL}/insta-admin/edit-keywords?name=${name}`,
     {
