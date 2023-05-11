@@ -1,6 +1,6 @@
 // const BASE_URL = "http://127.0.0.1:8000/api/v1";
 
-import { ADM_EVENTS_NAME } from "./lib/settings";
+// import { ADM_EVENTS_NAME } from "./lib/settings";
 
 // const BASE_URL = "http://127.0.0.1:8000/api/v1";
 const BASE_URL =
@@ -10,15 +10,12 @@ const BASE_URL =
 
 // 인증후 랭킹 확인하기
 export async function getRanking() {
-  const response = await fetch(
-    `${BASE_URL}/insta/ranking?name=${ADM_EVENTS_NAME}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  const response = await fetch(`${BASE_URL}/insta/ranking`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
   const json = await response.json();
   return json;
 }
