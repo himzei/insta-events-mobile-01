@@ -36,6 +36,23 @@ const animationKeyframes = keyframes`
 const animation = `${animationKeyframes} 2s ease-in-out infinite`;
 
 export default function Home() {
+  // const navigate = useNavigate();
+  const url = window.location.href || "";
+  const pattern = /returnUrl=(.*)/;
+  const match = url.match(pattern);
+  const returnUrl = match[1];
+  console.log(returnUrl);
+
+  const pageToReturn = () => {
+    const timeoutId = setTimeout(() => {
+      window.location.replace(`${returnUrl}`);
+    }, 5000);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  };
+
   const {
     register,
     handleSubmit,
@@ -170,6 +187,7 @@ export default function Home() {
             <>
               {/* 안내사항 힌색박스 */}
               <VStack
+                onLoad={pageToReturn()}
                 w="full"
                 py="8"
                 bg="rgba(255, 255, 255, 0.7)"
@@ -264,7 +282,7 @@ export default function Home() {
             </>
           ) : (
             <>
-              {/* 참영방법 */}
+              {/* 참여방법 */}
               <VStack
                 w="full"
                 px="4"
@@ -520,8 +538,6 @@ export default function Home() {
               </VStack>
             </>
           )}
-
-          {/* 인증이 돤료되지 않았을 때 보여지는 화면 */}
 
           {/* 빈박스 */}
           <Box />
