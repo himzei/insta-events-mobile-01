@@ -37,21 +37,21 @@ const animation = `${animationKeyframes} 2s ease-in-out infinite`;
 
 export default function Home() {
   // const navigate = useNavigate();
-  const url = window.location.href || "";
-  const pattern = /returnUrl=(.*)/;
-  const match = url.match(pattern);
-  const returnUrl = match[1];
-  console.log(returnUrl);
+  // const url = window.location.href || "";
+  // const pattern = /returnUrl=(.*)/;
+  // const match = url.match(pattern);
+  // const returnUrl = match[1];
+  // console.log(returnUrl);
 
-  const pageToReturn = () => {
-    const timeoutId = setTimeout(() => {
-      window.location.assign(`${returnUrl}`);
-    }, 5000);
+  // const pageToReturn = () => {
+  //   const timeoutId = setTimeout(() => {
+  //     window.location.assign(`${returnUrl}`);
+  //   }, 5000);
 
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  };
+  //   return () => {
+  //     clearTimeout(timeoutId);
+  //   };
+  // };
 
   const {
     register,
