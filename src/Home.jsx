@@ -45,7 +45,7 @@ export default function Home() {
 
   const pageToReturn = () => {
     const timeoutId = setTimeout(() => {
-      window.location.replace(`${returnUrl}`);
+      window.location.href(`${returnUrl}`);
     }, 5000);
 
     return () => {
