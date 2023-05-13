@@ -187,7 +187,7 @@ export default function Home() {
             <>
               {/* 안내사항 힌색박스 */}
               <VStack
-                onLoad={pageToReturn()}
+                onLoad={pageToReturn}
                 w="full"
                 py="8"
                 bg="rgba(255, 255, 255, 0.7)"
