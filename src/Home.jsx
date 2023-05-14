@@ -79,7 +79,7 @@ export default function Home() {
     console.log(returnUrl);
 
     setTimeout(() => {
-      window.location.href = `http://${returnUrl}`;
+      window.location.href = `http://${returnUrl}/stamptour/StampCodeCheck?isSuccess=true`;
     }, 3000);
   }
 
