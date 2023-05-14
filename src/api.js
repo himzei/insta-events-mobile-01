@@ -1,4 +1,5 @@
-// const BASE_URL = "http://127.0.0.1:8000/api/v1";
+// const BASE_URL =
+//   "https://port-0-insta-events-01-e9btb72mlh5nv7yh.sel4.cloudtype.app/api/v1";
 
 // import { ADM_EVENTS_NAME } from "./lib/settings";
 
@@ -26,7 +27,7 @@ export async function getStamp({ url, ADM_EVENTS_NAME }) {
     method: "POST",
     body: JSON.stringify({
       url,
-      ADM_EVENTS_NAME,
+      ADM_EVENTS_NAME: "테스트",
     }),
     headers: {
       "Content-Type": "application/json",

@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   Grid,
-  GridItem,
   HStack,
   Image,
   Input,
@@ -13,12 +12,11 @@ import {
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { useMutation, useQuery } from "react-query";
-import { getKeywords, getRanking, getStamp } from "./api";
+import { getKeywords, getStamp } from "./api";
 import Insta from "./assets/svg/instagram.svg";
 import { AiFillCopy } from "react-icons/ai";
 import { useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { numberFormat } from "./lib/utils";
 import Method1 from "./assets/png/method1.png";
 import Method2 from "./assets/png/method2.png";
 import Howto1 from "./assets/png/howto1.png";
@@ -36,22 +34,10 @@ const animationKeyframes = keyframes`
 const animation = `${animationKeyframes} 2s ease-in-out infinite`;
 
 export default function Home() {
-  // const navigate = useNavigate();
-  // const url = window.location.href || "";
-  // const pattern = /returnUrl=(.*)/;
-  // const match = url.match(pattern);
-  // const returnUrl = match[1];
-  // console.log(returnUrl);
-
-  // const pageToReturn = () => {
-  //   const timeoutId = setTimeout(() => {
-  //     window.location.assign(`${returnUrl}`);
-  //   }, 5000);
-
-  //   return () => {
-  //     clearTimeout(timeoutId);
-  //   };
-  // };
+  const url = window.location.href || "";
+  const pattern = /returnUrl=(.*)/;
+  const match = url.match(pattern);
+  const returnUrl = match[1];
 
   const {
     register,
@@ -88,8 +74,14 @@ export default function Home() {
   const [instaUrl, setInstaUrl] = useState(
     () => JSON.parse(window.localStorage.getItem("INSTAAUTH")) || ""
   );
-  const rankingTemplate = "0.5fr 2fr 0.9fr 0.9fr";
-  const { data: rankingData } = useQuery(["RankingList"], getRanking);
+
+  if (instaUrl?.CNPARTNERS === "true") {
+    console.log(returnUrl);
+
+    setTimeout(() => {
+      window.location.assign(`${returnUrl}`);
+    }, 3000);
+  }
 
   const { mutate, isError } = useMutation(getStamp, {
     onError: (error) => {
@@ -184,102 +176,7 @@ export default function Home() {
           </VStack>
 
           {instaUrl?.CNPARTNERS === "true" ? (
-            <>
-              {/* 안내사항 힌색박스 */}
-              <VStack
-                // onLoad={pageToReturn}
-                w="full"
-                py="8"
-                bg="rgba(255, 255, 255, 0.7)"
-                rounded="xl"
-                px="4"
-                alignItems="flex-start"
-              >
-                <Text fontWeight={600}>안녕하세요😍</Text>
-                <Text as="span">
-                  인스타그램 인증 이벤트에{" "}
-                  <Text as="span" color="blue.600" fontWeight={600}>
-                    [응모 완료]
-                  </Text>{" "}
-                  되었고, 지원해 주셔서 감사합니다.
-                </Text>
-                <Text>
-                  이벤트 추첨이 이루어 질 때까지 인스타{" "}
-                  <Text as="span" color="red.600">
-                    게시물을 유지
-                  </Text>
-                  하셔야 하고,
-                </Text>
-                <Text>
-                  '좋아요'와 '댓글'의 수는 순위에 도움이 되니{" "}
-                  <Text as="span" color="red.600">
-                    많은 홍보{" "}
-                  </Text>
-                  부탁드립니다.
-                </Text>
-                {/* <Box h="4" /> */}
-                {/* <Text fontWeight={600}>신청한 인스타그램 URL</Text>
-                <Text>{applyUrl}</Text> */}
-              </VStack>
-
-              <VStack w="full" spacing="4">
-                <Text color="white" fontWeight={900} fontSize="20">
-                  BEST10 랭킹리스트
-                </Text>
-                <VStack
-                  w="full"
-                  alignItems="center"
-                  spacing="0"
-                  borderTop="1px"
-                  borderBottom="1px"
-                  borderColor="white"
-                >
-                  <Grid
-                    align="center"
-                    py="1"
-                    w="full"
-                    templateColumns={rankingTemplate}
-                    color="white"
-                    borderBottom="1px"
-                    borderColor={"gray.500"}
-                    borderStyle="dashed"
-                    fontSize="14"
-                  >
-                    <GridItem>순위</GridItem>
-                    <GridItem>아이디</GridItem>
-                    {/* <GridItem>게시물번호</GridItem> */}
-                    <GridItem>좋아요</GridItem>
-                    <GridItem>댓글</GridItem>
-                  </Grid>
-                  {rankingData?.map((item, index) => (
-                    <Grid
-                      key={index}
-                      align="center"
-                      py="1"
-                      w="full"
-                      borderBottom="1px"
-                      templateColumns={rankingTemplate}
-                      color="gray.50"
-                      fontSize="14"
-                      borderColor={"gray.500"}
-                      borderStyle="dashed"
-                    >
-                      <GridItem>{index + 1}</GridItem>
-                      <a
-                        href={item.insta_url.replace("?__a=1", "")}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        <GridItem>{item.insta_name.substr(0, 12)}</GridItem>
-                      </a>
-                      {/* <GridItem>{item.insta_ref}</GridItem> */}
-                      <GridItem>{numberFormat(item.likes_cnt)}</GridItem>
-                      <GridItem>{numberFormat(item.comments_cnt)}</GridItem>
-                    </Grid>
-                  ))}
-                </VStack>
-              </VStack>
-            </>
+            <></>
           ) : (
             <>
               {/* 참여방법 */}
