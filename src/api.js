@@ -21,13 +21,14 @@ export async function getRanking() {
   return json;
 }
 
-export async function getStamp({ url, ADM_EVENTS_NAME }) {
+export async function getStamp({ url, ADM_EVENTS_NAME, returnUrl }) {
   // console.log(url, ADM_EVENTS_NAME);
   const response = await fetch(`${BASE_URL}/insta/`, {
     method: "POST",
     body: JSON.stringify({
       url,
       ADM_EVENTS_NAME: "테스트",
+      returnUrl,
     }),
     headers: {
       "Content-Type": "application/json",

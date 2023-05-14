@@ -48,7 +48,7 @@ export default function Home() {
   const toast = useToast();
 
   const { data: getKeywordsDAta } = useQuery(
-    ["keywords-get", ADM_EVENTS_NAME],
+    ["keywords-get", ADM_EVENTS_NAME, returnUrl],
     getKeywords
   );
 
@@ -79,7 +79,7 @@ export default function Home() {
     console.log(returnUrl);
 
     setTimeout(() => {
-      window.location.assign(`${returnUrl}`);
+      window.location.href = `http://${returnUrl}`;
     }, 3000);
   }
 
@@ -100,7 +100,7 @@ export default function Home() {
         description: "성공적으로 전송하였습니다.",
         status: "success",
       });
-      window.location.reload();
+      // window.location.href = returnUrl;
     },
   });
 
