@@ -80,7 +80,7 @@ export default function Home() {
 
     setTimeout(() => {
       window.location.href = `${returnUrl}`;
-    }, 3000);
+    }, 5000);
   }
 
   const { mutate, isError } = useMutation(getStamp, {
@@ -176,7 +176,26 @@ export default function Home() {
           </VStack>
 
           {instaUrl?.CNPARTNERS === "true" ? (
-            <></>
+            <>
+              <VStack
+                w="full"
+                py="8"
+                bg="rgba(255, 255, 255, 0.7)"
+                rounded="xl"
+                px="4"
+                alignItems="flex-start"
+              >
+                <Text fontWeight={600}>안녕하세요😍</Text>
+                <Text as="span">
+                  인스타그램 인증 이벤트에{" "}
+                  <Text as="span" color="blue.600" fontWeight={600}>
+                    [응모 완료]
+                  </Text>{" "}
+                  되었고, 지원해 주셔서 감사합니다.
+                </Text>
+                <Text>잠시만 기다려 주세요...</Text>
+              </VStack>
+            </>
           ) : (
             <>
               {/* 참여방법 */}
