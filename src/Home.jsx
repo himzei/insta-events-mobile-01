@@ -185,15 +185,7 @@ export default function Home() {
                 px="4"
                 alignItems="flex-start"
               >
-                <Text fontWeight={600}>안녕하세요😍</Text>
-                <Text as="span">
-                  인스타그램 인증 이벤트에{" "}
-                  <Text as="span" color="blue.600" fontWeight={600}>
-                    [응모 완료]
-                  </Text>{" "}
-                  되었고, 지원해 주셔서 감사합니다.
-                </Text>
-                <Text>잠시만 기다려 주세요...</Text>
+                <Text fontWeight={600}>잠시만 기다려 주세요...</Text>
               </VStack>
             </>
           ) : (
