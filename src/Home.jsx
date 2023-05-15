@@ -75,13 +75,13 @@ export default function Home() {
     () => JSON.parse(window.localStorage.getItem("INSTAAUTH")) || ""
   );
 
-  // if (instaUrl?.CNPARTNERS === "true") {
-  //   console.log(returnUrl);
+  if (instaUrl?.CNPARTNERS === "true") {
+    console.log(returnUrl);
 
-  //   setTimeout(() => {
-  //     window.location.href = `${returnUrl}`;
-  //   }, 3000);
-  // }
+    setTimeout(() => {
+      window.location.href = `${returnUrl}`;
+    }, 3000);
+  }
 
   const { mutate, isError } = useMutation(getStamp, {
     onError: (error) => {
@@ -100,7 +100,7 @@ export default function Home() {
         description: "성공적으로 전송하였습니다.",
         status: "success",
       });
-      window.location.href = returnUrl;
+      window.location.reload();
     },
   });
 
