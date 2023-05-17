@@ -71,29 +71,29 @@ export default function Home() {
     .toString()
     .replace(/,+/g, " ");
 
-  const [instaUrl, setInstaUrl] = useState(
-    () => JSON.parse(window.localStorage.getItem("INSTAAUTH")) || ""
-  );
+  // const [instaUrl, setInstaUrl] = useState(
+  //   () => JSON.parse(window.localStorage.getItem("INSTAAUTH")) || ""
+  // );
 
-  if (instaUrl?.CNPARTNERS === "true") {
-    console.log(returnUrl);
+  // if (instaUrl?.CNPARTNERS === "true") {
+  //   console.log(returnUrl);
 
-    setTimeout(() => {
-      window.location.href = `${returnUrl}`;
-    }, 5000);
-  }
+  //   setTimeout(() => {
+  //     window.location.href = `${returnUrl}`;
+  //   }, 5000);
+  // }
 
   const { mutate, isError } = useMutation(getStamp, {
     onError: (error) => {
       console.log(error);
     },
     onSuccess: () => {
-      setInstaUrl(() =>
-        window.localStorage.setItem(
-          "INSTAAUTH",
-          JSON.stringify({ CNPARTNERS: "true" })
-        )
-      );
+      // setInstaUrl(() =>
+      //   window.localStorage.setItem(
+      //     "INSTAAUTH",
+      //     JSON.stringify({ CNPARTNERS: "true" })
+      //   )
+      // );
 
       toast({
         title: "인스타그램 URL",
@@ -101,6 +101,7 @@ export default function Home() {
         status: "success",
       });
       window.location.reload();
+      window.location.href = `${returnUrl}`;
     },
   });
 
@@ -175,277 +176,260 @@ export default function Home() {
             <Text fontWeight={900}>{getKeywordsDAta?.data?.events_name}</Text>
           </VStack>
 
-          {instaUrl?.CNPARTNERS === "true" ? (
-            <>
+          <>
+            {/* 참여방법 */}
+            <VStack
+              w="full"
+              px="4"
+              py="6"
+              bg="white"
+              rounded="xl"
+              spacing={8}
+              position="relative"
+            >
+              <Box
+                position="absolute"
+                top="-5"
+                bg="white"
+                px="8"
+                rounded="2xl"
+                py="2"
+              >
+                <Text fontSize="16" color="red.900" fontWeight={900}>
+                  이벤트 참여방법
+                </Text>
+              </Box>
+              {/* step1 */}
+
+              {/* 해시태그 복사 */}
               <VStack
                 w="full"
-                py="8"
-                bg="rgba(255, 255, 255, 0.7)"
-                rounded="xl"
-                px="4"
-                alignItems="flex-start"
-              >
-                <Text fontWeight={600}>잠시만 기다려 주세요...</Text>
-              </VStack>
-            </>
-          ) : (
-            <>
-              {/* 참여방법 */}
-              <VStack
-                w="full"
-                px="4"
-                py="6"
-                bg="white"
-                rounded="xl"
-                spacing={8}
-                position="relative"
-              >
-                <Box
-                  position="absolute"
-                  top="-5"
-                  bg="white"
-                  px="8"
-                  rounded="2xl"
-                  py="2"
-                >
-                  <Text fontSize="16" color="red.900" fontWeight={900}>
-                    이벤트 참여방법
-                  </Text>
-                </Box>
-                {/* step1 */}
-
-                {/* 해시태그 복사 */}
-                <VStack
-                  w="full"
-                  overflow="hidden"
-                  spacing="0"
-                  rounded="md"
-                  border="1px"
-                  borderColor="gray.300"
-                >
-                  <HStack
-                    bgGradient="linear(to-l, #7928CA, #FF0080)"
-                    w="full"
-                    justifyContent="space-between"
-                    color="white"
-                  >
-                    <Text fontWeight="900" fontSize="16" py="2" px="4">
-                      1. 해시태그 복사
-                    </Text>
-
-                    <Button variant="ghost" _hover={{ bg: "none" }}>
-                      <CopyToClipboard
-                        text={keywordsHash}
-                        onCopy={() => setCopied(true)}
-                      >
-                        {copied === true ? (
-                          <>
-                            <Text fontSize="13">복사됨</Text>
-                          </>
-                        ) : (
-                          <Box
-                            as={motion.div}
-                            animation={animation}
-                            transition="0.2s linear"
-                          >
-                            <AiFillCopy size="16" />
-                          </Box>
-                        )}
-                      </CopyToClipboard>
-                    </Button>
-                  </HStack>
-                  <HStack
-                    bg="white"
-                    fontSize="16"
-                    color="green.600"
-                    w="full"
-                    px="2"
-                    py="4"
-                    gap="1"
-                    wrap="wrap"
-                  >
-                    {keywords?.map((item, i) => (
-                      <Text
-                        key={i}
-                        cursor="pointer"
-                        bg="gray.900"
-                        color="white"
-                        px="4"
-                        py="1"
-                        rounded="2xl"
-                      >
-                        {item.includes("#") ? item.trim() : `#${item.trim()}`}
-                      </Text>
-                    ))}
-                  </HStack>
-                </VStack>
-
-                {/* step2 */}
-
-                <VStack
-                  w="full"
-                  overflow="hidden"
-                  spacing="0"
-                  rounded="md"
-                  border="1px"
-                  borderColor="gray.300"
-                >
-                  <HStack
-                    bgGradient="linear(to-l, #7928CA, #FF0080)"
-                    w="full"
-                    justifyContent="space-between"
-                    color="white"
-                  >
-                    <Text fontWeight="900" fontSize="16" py="2" px="4">
-                      2. 해시태그 붙여넣기
-                    </Text>
-                  </HStack>
-                  <VStack spacing="4" py="3">
-                    <Text as="span" align="center">
-                      인스타 이동 후 <br />
-                      <Text as="span" color="red.500" fontWeight={600}>
-                        복사 한 해시태그{" "}
-                      </Text>
-                      붙여넣기
-                    </Text>
-                    <HStack justifyContent="space-around" px="4">
-                      <VStack w="40%">
-                        <Box>
-                          <Image src={Howto1} />
-                        </Box>
-                        <Box>
-                          <Image src={Howto2} />
-                        </Box>
-                      </VStack>
-                      <MdOutlineDoubleArrow color="red" />
-                      <VStack
-                        cursor="pointer"
-                        spacing={0}
-                        onClick={() =>
-                          window.open("https://www.instagram.com/")
-                        }
-                      >
-                        <Box w="12">
-                          <Image src={Insta} />
-                        </Box>
-
-                        <VStack spacing={0}>
-                          <Text fontSize="10" fontWeight={600}>
-                            인스타로 이동
-                          </Text>
-                          <Text
-                            color="red.500"
-                            fontSize="12"
-                            fontWeight={600}
-                            as={motion.div}
-                            animation={animation}
-                            transition="0.2s linear"
-                          >
-                            CLICK
-                          </Text>
-                        </VStack>
-                      </VStack>
-                    </HStack>
-                  </VStack>
-                </VStack>
-
-                {/* step3 */}
-
-                <VStack
-                  w="full"
-                  overflow="hidden"
-                  spacing="0"
-                  rounded="md"
-                  border="1px"
-                  borderColor="gray.300"
-                >
-                  <HStack
-                    bgGradient="linear(to-l, #7928CA, #FF0080)"
-                    w="full"
-                    justifyContent="space-between"
-                    color="white"
-                  >
-                    <Text fontWeight="900" fontSize="16" py="2" px="4">
-                      3. 입력폼에 URL 붙여넣기
-                    </Text>
-                  </HStack>
-                  <VStack spacing="4" py="3">
-                    <Text as="span" align="center">
-                      인스타 '링크복사' 후
-                      <br />
-                      아래 입력폼에서 붙여넣기 후{" "}
-                      <Text as="span" color="red.500" fontWeight={600}>
-                        전송!!
-                      </Text>
-                    </Text>
-                    <Grid
-                      templateColumns={"4fr 1fr 4fr"}
-                      px="2"
-                      justifyContent="center"
-                      alignItems="center"
-                    >
-                      <Box>
-                        <Image src={Method1} />
-                      </Box>
-
-                      <Box w="full" align="center">
-                        <MdOutlineDoubleArrow color="red" />
-                      </Box>
-                      <Box>
-                        <Image src={Method2} />
-                      </Box>
-                    </Grid>
-                  </VStack>
-                </VStack>
-              </VStack>
-
-              {/* form */}
-              <VStack
-                bg="white"
-                as="form"
                 overflow="hidden"
+                spacing="0"
                 rounded="md"
-                onSubmit={handleSubmit(onValid, onInvalid)}
-                w="full"
+                border="1px"
+                borderColor="gray.300"
               >
                 <HStack
-                  bgGradient="linear(to-r, #7928CA, #FF0080)"
+                  bgGradient="linear(to-l, #7928CA, #FF0080)"
                   w="full"
                   justifyContent="space-between"
                   color="white"
                 >
                   <Text fontWeight="900" fontSize="16" py="2" px="4">
-                    인스타그램 URL 전송
+                    1. 해시태그 복사
+                  </Text>
+
+                  <Button variant="ghost" _hover={{ bg: "none" }}>
+                    <CopyToClipboard
+                      text={keywordsHash}
+                      onCopy={() => setCopied(true)}
+                    >
+                      {copied === true ? (
+                        <>
+                          <Text fontSize="13">복사됨</Text>
+                        </>
+                      ) : (
+                        <Box
+                          as={motion.div}
+                          animation={animation}
+                          transition="0.2s linear"
+                        >
+                          <AiFillCopy size="16" />
+                        </Box>
+                      )}
+                    </CopyToClipboard>
+                  </Button>
+                </HStack>
+                <HStack
+                  bg="white"
+                  fontSize="16"
+                  color="green.600"
+                  w="full"
+                  px="2"
+                  py="4"
+                  gap="1"
+                  wrap="wrap"
+                >
+                  {keywords?.map((item, i) => (
+                    <Text
+                      key={i}
+                      cursor="pointer"
+                      bg="gray.900"
+                      color="white"
+                      px="4"
+                      py="1"
+                      rounded="2xl"
+                    >
+                      {item.includes("#") ? item.trim() : `#${item.trim()}`}
+                    </Text>
+                  ))}
+                </HStack>
+              </VStack>
+
+              {/* step2 */}
+
+              <VStack
+                w="full"
+                overflow="hidden"
+                spacing="0"
+                rounded="md"
+                border="1px"
+                borderColor="gray.300"
+              >
+                <HStack
+                  bgGradient="linear(to-l, #7928CA, #FF0080)"
+                  w="full"
+                  justifyContent="space-between"
+                  color="white"
+                >
+                  <Text fontWeight="900" fontSize="16" py="2" px="4">
+                    2. 해시태그 붙여넣기
                   </Text>
                 </HStack>
-                <Box w="full" px="2">
-                  <Input
-                    placeholder="여기에 URL을 입력해 주세요"
-                    bg="gray.100"
-                    {...register("url", {
-                      required: "인스타그램 URL을 입력해주세요.",
-                      minLength: {
-                        message: "올바른 인스타 URL을 입력해 주세요.",
-                        value: 6,
-                      },
-                    })}
-                    type="text"
-                  />
-                </Box>
-                <Text fontSize="14" color="red.500" w="full" px="4">
-                  {errors?.url?.message ||
-                    (isError &&
-                      "올바른 인스타 URL 또는 지정된 해시태그를 모두 입력해 주셔야 합니다.")}
-                </Text>
+                <VStack spacing="4" py="3">
+                  <Text as="span" align="center">
+                    인스타 이동 후 <br />
+                    <Text as="span" color="red.500" fontWeight={600}>
+                      복사 한 해시태그{" "}
+                    </Text>
+                    붙여넣기
+                  </Text>
+                  <HStack justifyContent="space-around" px="4">
+                    <VStack w="40%">
+                      <Box>
+                        <Image src={Howto1} />
+                      </Box>
+                      <Box>
+                        <Image src={Howto2} />
+                      </Box>
+                    </VStack>
+                    <MdOutlineDoubleArrow color="red" />
+                    <VStack
+                      cursor="pointer"
+                      spacing={0}
+                      onClick={() => window.open("https://www.instagram.com/")}
+                    >
+                      <Box w="12">
+                        <Image src={Insta} />
+                      </Box>
 
-                <Box w="full" px="2" pb="2" align="right">
-                  <Button py="0" colorScheme="red" type="submit" size="sm">
-                    <Text fontSize="14">전송</Text>
-                  </Button>
-                </Box>
+                      <VStack spacing={0}>
+                        <Text fontSize="10" fontWeight={600}>
+                          인스타로 이동
+                        </Text>
+                        <Text
+                          color="red.500"
+                          fontSize="12"
+                          fontWeight={600}
+                          as={motion.div}
+                          animation={animation}
+                          transition="0.2s linear"
+                        >
+                          CLICK
+                        </Text>
+                      </VStack>
+                    </VStack>
+                  </HStack>
+                </VStack>
               </VStack>
-            </>
-          )}
+
+              {/* step3 */}
+
+              <VStack
+                w="full"
+                overflow="hidden"
+                spacing="0"
+                rounded="md"
+                border="1px"
+                borderColor="gray.300"
+              >
+                <HStack
+                  bgGradient="linear(to-l, #7928CA, #FF0080)"
+                  w="full"
+                  justifyContent="space-between"
+                  color="white"
+                >
+                  <Text fontWeight="900" fontSize="16" py="2" px="4">
+                    3. 입력폼에 URL 붙여넣기
+                  </Text>
+                </HStack>
+                <VStack spacing="4" py="3">
+                  <Text as="span" align="center">
+                    인스타 '링크복사' 후
+                    <br />
+                    아래 입력폼에서 붙여넣기 후{" "}
+                    <Text as="span" color="red.500" fontWeight={600}>
+                      전송!!
+                    </Text>
+                  </Text>
+                  <Grid
+                    templateColumns={"4fr 1fr 4fr"}
+                    px="2"
+                    justifyContent="center"
+                    alignItems="center"
+                  >
+                    <Box>
+                      <Image src={Method1} />
+                    </Box>
+
+                    <Box w="full" align="center">
+                      <MdOutlineDoubleArrow color="red" />
+                    </Box>
+                    <Box>
+                      <Image src={Method2} />
+                    </Box>
+                  </Grid>
+                </VStack>
+              </VStack>
+            </VStack>
+
+            {/* form */}
+            <VStack
+              bg="white"
+              as="form"
+              overflow="hidden"
+              rounded="md"
+              onSubmit={handleSubmit(onValid, onInvalid)}
+              w="full"
+            >
+              <HStack
+                bgGradient="linear(to-r, #7928CA, #FF0080)"
+                w="full"
+                justifyContent="space-between"
+                color="white"
+              >
+                <Text fontWeight="900" fontSize="16" py="2" px="4">
+                  인스타그램 URL 전송
+                </Text>
+              </HStack>
+              <Box w="full" px="2">
+                <Input
+                  placeholder="여기에 URL을 입력해 주세요"
+                  bg="gray.100"
+                  {...register("url", {
+                    required: "인스타그램 URL을 입력해주세요.",
+                    minLength: {
+                      message: "올바른 인스타 URL을 입력해 주세요.",
+                      value: 6,
+                    },
+                  })}
+                  type="text"
+                />
+              </Box>
+              <Text fontSize="14" color="red.500" w="full" px="4">
+                {errors?.url?.message ||
+                  (isError &&
+                    "올바른 인스타 URL 또는 지정된 해시태그를 모두 입력해 주셔야 합니다.")}
+              </Text>
+
+              <Box w="full" px="2" pb="2" align="right">
+                <Button py="0" colorScheme="red" type="submit" size="sm">
+                  <Text fontSize="14">전송</Text>
+                </Button>
+              </Box>
+            </VStack>
+          </>
 
           {/* 빈박스 */}
           <Box />
