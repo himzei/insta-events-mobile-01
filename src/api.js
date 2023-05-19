@@ -8,7 +8,7 @@
 const BASE_URL =
   process.env.NODE_ENV === "development"
     ? "http://127.0.0.1:8000/api/v1"
-    : "https://insta-events.azurewebsites.net/api/v1";
+    : "https://port-0-insta-events-01-e9btb72mlh5nv7yh.sel4.cloudtype.app/api/v1";
 
 export async function getStamp({ urlInsta }) {
   // console.log(url, ADM_EVENTS_NAME);
