@@ -71,43 +71,26 @@ export default function Home() {
     .toString()
     .replace(/,+/g, " ");
 
-  // const [instaUrl, setInstaUrl] = useState(
-  //   () => JSON.parse(window.localStorage.getItem("INSTAAUTH")) || ""
-  // );
-
-  // if (instaUrl?.CNPARTNERS === "true") {
-  //   console.log(returnUrl);
-
-  //   setTimeout(() => {
-  //     window.location.href = `${returnUrl}`;
-  //   }, 5000);
-  // }
-
   const { mutate, isError } = useMutation(getStamp, {
     onError: (error) => {
       console.log(error);
     },
     onSuccess: () => {
-      // setInstaUrl(() =>
-      //   window.localStorage.setItem(
-      //     "INSTAAUTH",
-      //     JSON.stringify({ CNPARTNERS: "true" })
-      //   )
-      // );
-
       toast({
         title: "인스타그램 URL",
         description: "성공적으로 전송하였습니다.",
         status: "success",
       });
-      window.location.reload();
+
       window.location.href = `${returnUrl}`;
     },
   });
 
-  const onValid = ({ url }) => {
-    mutate({ url, ADM_EVENTS_NAME });
+  const onValid = ({ urlInsta }) => {
+    // console.log(urlInsta);
+    mutate({ urlInsta });
   };
+
   const onInvalid = (error) => {
     console.log(error);
   };
@@ -407,7 +390,7 @@ export default function Home() {
                 <Input
                   placeholder="여기에 URL을 입력해 주세요"
                   bg="gray.100"
-                  {...register("url", {
+                  {...register("urlInsta", {
                     required: "인스타그램 URL을 입력해주세요.",
                     minLength: {
                       message: "올바른 인스타 URL을 입력해 주세요.",
