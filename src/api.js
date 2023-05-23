@@ -3,11 +3,12 @@
 
 // import { ADM_EVENTS_NAME } from "./lib/settings";
 
-// const BASE_URL = "https://insta-events.azurewebsites.net/api/v1";
 const BASE_URL =
-  process.env.NODE_ENV === "development"
-    ? "http://127.0.0.1:8000/api/v1"
-    : "https://port-0-insta-events-01-7e6o2clhty4r48.sel4.cloudtype.app/api/v1";
+  "https://port-0-insta-events-01-e9btb72mlh5nv7yh.sel4.cloudtype.app/api/v1";
+// const BASE_URL =
+//   process.env.NODE_ENV === "development"
+//     ? "http://127.0.0.1:8000/api/v1"
+//     : "https://port-0-insta-events-01-7e6o2clhty4r48.sel4.cloudtype.app/api/v1";
 
 export async function getStamp({ urlInsta }) {
   // console.log(url, ADM_EVENTS_NAME);
