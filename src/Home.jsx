@@ -83,7 +83,7 @@ export default function Home() {
       });
       console.log();
 
-      window.location.href = `${encodeURIComponent(returnUrl)}`;
+      window.location.href = `${encodeURI(returnUrl)}`;
     },
   });
 
