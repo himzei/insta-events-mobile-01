@@ -81,8 +81,8 @@ export default function Home() {
         description: "성공적으로 전송하였습니다.",
         status: "success",
       });
-      // /stamptour/StampCodeCheck?isSuccess=true
-      window.location.href = `${returnUrl}/stamptour/StampCodeCheck?isSuccess=true&code={code}&key={key}`;
+
+      window.location.href = `${returnUrl}`;
     },
   });
 
