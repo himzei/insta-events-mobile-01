@@ -81,7 +81,7 @@ export default function Home() {
         description: "성공적으로 전송하였습니다.",
         status: "success",
       });
-      console.log();
+      console.log(encodeURI(returnUrl));
 
       window.location.href = `${encodeURI(returnUrl)}`;
     },
