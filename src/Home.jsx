@@ -82,7 +82,7 @@ export default function Home() {
         status: "success",
       });
       // /stamptour/StampCodeCheck?isSuccess=true
-      window.location.href = `${returnUrl}/stamptour/StampCodeCheck?isSuccess=true`;
+      window.location.href = `${returnUrl}stamptour/StampCodeCheck?isSuccess=true&code={code}&key={key}`;
     },
   });
 
