@@ -82,7 +82,7 @@ export default function Home() {
         status: "success",
       });
 
-      window.location.href = `${returnUrl}`;
+      window.location.href = `${encodeURIComponent(returnUrl)}`;
     },
   });
 
